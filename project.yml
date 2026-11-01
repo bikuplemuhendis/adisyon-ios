@@ -1,0 +1,68 @@
+name: AdisyonYonetim
+options:
+  bundleIdPrefix: com.adisyonyonetim
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: tr
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""   # Mac'te kendi Team ID'nizi girin
+    CODE_SIGN_STYLE: Automatic
+targets:
+  AdisyonYonetim:
+    type: application
+    platform: iOS
+    sources:
+      - path: AdisyonYonetim
+    info:
+      path: AdisyonYonetim/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: "Adisyon Yönetim"
+        CFBundleName: "Adisyon Yönetim"
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CFBundleDevelopmentRegion: tr
+        UILaunchScreen:
+          UIImageName: LaunchLogo
+          UIColorName: LaunchBackground
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIBackgroundModes:
+          - remote-notification
+        ITSAppUsesNonExemptEncryption: false
+        API_BASE_URL: "$(API_BASE_URL)"
+        PUSH_ENABLED: "$(PUSH_ENABLED)"
+    entitlements:
+      path: AdisyonYonetim/Resources/AdisyonYonetim.entitlements
+      properties:
+        aps-environment: development
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.adisyonyonetim.app
+        PRODUCT_NAME: "Adisyon Yönetim"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        API_BASE_URL: "https://api.adisyonyonetim.com.tr/api"
+        PUSH_ENABLED: "NO"
+        ENABLE_PREVIEWS: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+schemes:
+  AdisyonYonetim:
+    build:
+      targets:
+        AdisyonYonetim: all
+    run:
+      config: Debug
+    archive:
+      config: Release

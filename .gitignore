@@ -1,0 +1,9 @@
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+build/
+*.ipa
+*.xcarchive
+GoogleService-Info.plist
+.DS_Store
