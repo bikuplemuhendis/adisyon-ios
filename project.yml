@@ -18,6 +18,11 @@ targets:
     platform: iOS
     sources:
       - path: AdisyonYonetim
+        excludes:
+          - Resources/PrivacyInfo.xcprivacy
+      - path: AdisyonYonetim/Resources/PrivacyInfo.xcprivacy
+        type: file
+        buildPhase: resources
     info:
       path: AdisyonYonetim/Resources/Info.plist
       properties:
