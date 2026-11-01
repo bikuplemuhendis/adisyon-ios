@@ -30,6 +30,7 @@ struct SettingsView: View {
                 LabeledContent("Sürüm", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "-")
                 LabeledContent("Sunucu", value: AppConfig.baseURL.host ?? "-")
                 LabeledContent("Bildirimler", value: AppConfig.pushEnabled ? "Açık" : "Kapalı")
+                NavigationLink("Hakkında") { AboutView() }
             }
             Section {
                 Button("Çıkış yap", role: .destructive) { confirmLogout = true }

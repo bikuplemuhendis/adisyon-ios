@@ -10,7 +10,7 @@ final class LoginViewModel: ObservableObject {
     @Published var mode: Mode = .email
     @Published var email = ""
     @Published var password = ""
-    @Published var businessSlug: String = UserDefaults.standard.string(forKey: "businessSlug") ?? AppConfig.defaultBusinessSlug
+    @Published var businessSlug = ""
     @Published var businessName: String?
     @Published var pin = ""
     @Published var totpCode = ""
@@ -33,7 +33,6 @@ final class LoginViewModel: ObservableObject {
             let slug = self.businessSlug.trimmingCharacters(in: .whitespaces).lowercased()
             let boot = try await state.api.bootstrap(slug: slug)
             guard let bid = boot.businessId else { throw APIError.validation("İşletme bulunamadı: \(slug)") }
-            UserDefaults.standard.set(slug, forKey: "businessSlug")
             self.businessName = boot.name
             return try await state.api.pinLogin(businessId: bid, pin: self.pin)
         }

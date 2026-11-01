@@ -18,11 +18,18 @@ enum AppConfig {
         return raw == "YES" || raw == "TRUE" || raw == "1"
     }
 
-    /// Kimlik içermeyen genel User-Agent.
-    static let userAgent = "AdisyonYonetim-iOS/1.0"
+    /// Kimlik içermeyen genel User-Agent (bundle sürümü).
+    static var userAgent: String {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
+        return "AdisyonYonetim-iOS/\(version) (\(build))"
+    }
 
     /// Canlı güncelleme için yoklama aralığı (sn).
     static let pollInterval: TimeInterval = 5
 
-    static let defaultBusinessSlug = "demo-kafe"
+    static let privacyURL = URL(string: "https://adisyonyonetim.com.tr/gizlilik")!
+    static let kvkkURL = URL(string: "https://adisyonyonetim.com.tr/kvkk")!
+    static let accountDeletionURL = URL(string: "https://adisyonyonetim.com.tr/hesap-silme")!
+    static let supportURL = URL(string: "https://adisyonyonetim.com.tr/destek")!
 }

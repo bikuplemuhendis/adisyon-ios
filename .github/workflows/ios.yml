@@ -41,6 +41,7 @@ jobs:
             CODE_SIGN_ENTITLEMENTS= \
             DEVELOPMENT_TEAM= \
             PROVISIONING_PROFILE_SPECIFIER= \
+            PRODUCT_NAME=AdisyonYonetim \
             build | tee xcodebuild.log
 
       - name: Package IPA
@@ -58,6 +59,11 @@ jobs:
           echo "CFBundleDisplayName=${DISPLAY}"
           test "$EXEC" = "AdisyonYonetim"
           test "$DISPLAY" = "Adisyon Yönetim"
+          test -f Payload/AdisyonYonetim.app/PrivacyInfo.xcprivacy
+          if /usr/libexec/PlistBuddy -c 'Print :UIBackgroundModes' Payload/AdisyonYonetim.app/Info.plist >/dev/null 2>&1; then
+            echo "UIBackgroundModes must be absent while PUSH_ENABLED=NO" >&2
+            exit 1
+          fi
           python3 - <<'PY'
           import os
           import zipfile

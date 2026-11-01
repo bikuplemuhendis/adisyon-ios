@@ -27,14 +27,19 @@ open AdisyonYonetim.xcodeproj
 | `PUSH_ENABLED` | `NO` | `YES` olunca APNs kaydı + `POST /api/devices` (platform `ios`) |
 
 ## Push bildirimleri (opsiyonel)
-Push varsayılan olarak **kapalıdır**. Açmak için:
-1. `PUSH_ENABLED: "YES"` yapın.
-2. **Firebase (FCM) kullanılacaksa:** Xcode → *File → Add Package Dependencies* → `https://github.com/firebase/firebase-ios-sdk`, `FirebaseMessaging` ürününü ekleyin. Firebase konsolundan iOS uygulaması (`com.adisyonyonetim.app`) oluşturup **GoogleService-Info.plist** dosyasını indirin ve `AdisyonYonetim/Resources/` altına koyun (target'a dahil edin; `.gitignore`'da, repoya eklenmez). APNs Auth Key'i (.p8) Firebase → Project Settings → Cloud Messaging'e yükleyin.
-3. Firebase eklenmezse uygulama ham APNs token'ını `/api/devices`'a gönderir.
-4. Production dağıtımında `AdisyonYonetim.entitlements` içindeki `aps-environment` değerini `production` yapın.
+Push varsayılan olarak **kapalıdır** (`PUSH_ENABLED: "NO"`). Bu durumda:
+- `Info.plist` / `project.yml` içinde `UIBackgroundModes` **yoktur**
+- `AdisyonYonetim.entitlements` **boştur** (`aps-environment` yok)
+
+Açmak için (üçü birden):
+1. `project.yml` → target settings `PUSH_ENABLED: "YES"`
+2. `project.yml` → `info.properties` altına `UIBackgroundModes: [remote-notification]` ekleyin (Info.plist ile aynı)
+3. `AdisyonYonetim.entitlements` içine `aps-environment` ekleyin (`development`; App Store için `production`)
+4. **Firebase (FCM) kullanılacaksa:** Xcode → *File → Add Package Dependencies* → `https://github.com/firebase/firebase-ios-sdk`, `FirebaseMessaging` ürününü ekleyin. Firebase konsolundan iOS uygulaması (`com.adisyonyonetim.app`) oluşturup **GoogleService-Info.plist** dosyasını indirin ve `AdisyonYonetim/Resources/` altına koyun (target'a dahil edin; `.gitignore`'da, repoya eklenmez). APNs Auth Key'i (.p8) Firebase → Project Settings → Cloud Messaging'e yükleyin.
+5. Firebase eklenmezse uygulama ham APNs token'ını `/api/devices`'a gönderir.
 
 ## Çalıştırma
-Simülatör veya cihaz seçip ⌘R. Demo: `owner@demo-kafe.local` / işletme kodu `demo-kafe` (PIN girişi için).
+Simülatör veya cihaz seçip ⌘R. PIN alanında işletme kodu **önceden doldurulmaz**; yer tutucu `işletme kodunuz`. İnceleme hesabı için `docs/APP_STORE.md`.
 
 ## Arşivleme / dağıtım
 ```bash

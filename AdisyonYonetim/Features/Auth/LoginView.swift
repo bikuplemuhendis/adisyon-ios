@@ -75,7 +75,7 @@ struct LoginView: View {
 
     private var pinForm: some View {
         VStack(spacing: 18) {
-            TextField("İşletme kodu (örn. demo-kafe)", text: $vm.businessSlug)
+            TextField("işletme kodunuz", text: $vm.businessSlug)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .focused($focus, equals: .slug)

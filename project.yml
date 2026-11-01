@@ -38,15 +38,17 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-        UIBackgroundModes:
-          - remote-notification
+        # Push off (PUSH_ENABLED=NO): do not set UIBackgroundModes.
+        # When PUSH_ENABLED=YES, add:
+        #   UIBackgroundModes: [remote-notification]
         ITSAppUsesNonExemptEncryption: false
         API_BASE_URL: "$(API_BASE_URL)"
         PUSH_ENABLED: "$(PUSH_ENABLED)"
+    # Push off: empty entitlements (no aps-environment).
+    # When PUSH_ENABLED=YES, set properties.aps-environment to development
+    # (production for App Store) and add UIBackgroundModes above.
     entitlements:
       path: AdisyonYonetim/Resources/AdisyonYonetim.entitlements
-      properties:
-        aps-environment: development
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.adisyonyonetim.app
