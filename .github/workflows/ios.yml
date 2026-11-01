@@ -10,16 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  probe:
-    name: Runner probe
-    runs-on: ubuntu-latest
-    steps:
-      - name: Confirm hosted runners
-        run: echo ok
-
   build:
     name: Build unsigned IPA
-    needs: probe
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
